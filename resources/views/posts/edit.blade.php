@@ -40,7 +40,11 @@ a:hover, a:active {
   <textarea  style="padding: 14px 25px;" name="description" >{{$post->description}}</textarea>
   <br><br>
   <label>written by:</label>
-  <label type="text" name="user_id">{{$post->user->name }}</label>
+  <select name="user_id">
+  @foreach ($users as $user)
+  <option value="{{$user->id}}">{{$user->name}}</option>
+  @endforeach
+  </select>
   <br>
   <input type="submit" value="update" >
 
