@@ -35,7 +35,7 @@ a:hover, a:active {
 input{
   background-color:  red;
   color: white;
-  padding: 10px 20px;
+  padding: 10px 10px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
@@ -45,7 +45,9 @@ input{
 </head>
 <body>
 
-<a style="background-color: blue;" href="{{route('posts.create')}}">create post</a>
+<a style="background-color: green;" href="{{route('posts.create')}}">create post</a>
+<a style="background-color: yellow;" href="{{route('home')}}">logout</a>
+
 
 <h2>POSTS Table</h2>
 
