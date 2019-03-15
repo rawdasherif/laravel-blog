@@ -1,24 +1,11 @@
 
-<html>
-<style>
-a:link, a:visited {
-  background-color: green;
-  color: white;
-  padding: 14px 25px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
+@extends('layouts.app')
 
-}
+@section('content')
 
-a:hover, a:active {
-  background-color: green;
-}
-</style>
-<body>
-<a href="{{route('posts.index')}}">Back</a>
+<a  class="btn btn-info" href="{{route('posts.index')}}" >Back</a>
 <br>
-
+<br>
 @if ($errors->any())
     <div class="alert alert-danger">
         <ul>
@@ -29,26 +16,29 @@ a:hover, a:active {
     </div>
 @endif
 <br>
-
 <form action="{{route('posts.store')}}" method ="POST">
 @csrf
-  <label>Title:</label>
-  <input type="text" name="title" >
-  <br>
-  <br>
-  Description:<br>
-  <textarea name="description"></textarea>
-  <br><br>
-  <label>Select User:</label>
-  <select name="user_id">
-  @foreach ($users as $user)
-  <option value="{{$user->id}}">{{$user->name}}</option>
-  @endforeach
-  </select>
-  <br>
-  <input type="submit" value="Submit">
+  <div class="form-group">
+    <label for="exampleFormControlInput1">TITLE</label>
+    <input type="text" class="form-control" id="exampleFormControlInput1" name="title" >
+  </div>
 
-</form> 
+  <div class="form-group">
+    <label for="exampleFormControlTextarea1">DESCRIPTION:</label>
+    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="description"></textarea>
+  </div>
 
-</body>
-</html>
+  <div class="form-group">
+    <label for="exampleFormControlSelect2">WRITTEN BY</label>
+    <select multiple class="form-control" id="exampleFormControlSelect2" name="user_id">
+    @foreach ($users as $user)
+    <option value="{{$user->id}}">{{$user->name}}</option>
+      @endforeach
+    </select>
+    <br>
+  <input class="btn btn-info" type="submit" value="update" >
+
+  </div>
+
+</form>
+@endsection

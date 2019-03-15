@@ -1,35 +1,23 @@
-<html>
-<style>
-a:link, a:visited {
-  background-color: green;
-  color: white;
-  padding: 14px 25px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-}
+@extends('layouts.app')
 
-a:hover, a:active {
-  background-color: green;
-}
-</style>
-<body>
+@section('content')
 
-<label>Title : </label>
-<label>{{$post->title}} </label>
-<br><br>
-<label>Description : </label>
-<label>{{$post->description}} </label>
-<br><br>
-<label>written by : </label>
-<label>{{$post->user->name}} </label>
-<br><br>
-<label>Created At  : </label>
-<label>{{$post->created_at}} </label>
-<br><br>
-<a href="{{route('posts.index')}}">Back</a>
+<dl class="row">
+  <dt class="col-sm-3">Title :</dt>
+  <dd class="col-sm-9">{{$post->title}} </dd>
 
+  <dt class="col-sm-3">Description :</dt>
+  <dd class="col-sm-9">
+    <p>{{$post->description}}</p>
+  </dd>
 
+  <dt class="col-sm-3">written by :</dt>
+  <dd class="col-sm-9">{{$post->user->name}} </dd>
 
-</body>
-</html>
+  <dt class="col-sm-3 text-truncate">Created At  :</dt>
+  <dd class="col-sm-9">{{$post->created_at->format('l jS \of F Y h:i:s A')}}</dd>
+
+  <a   class="btn btn-info" href="{{route('posts.index')}}">Back</a>
+</dl>
+
+@endsection

@@ -42,7 +42,7 @@ class PostsController extends Controller
 
       public function update(UpdatePostRequest  $request,Post $post )
         {
- 
+          $post->slug = null;
           $post->title = request()->all()['title'];
           $post->description = request()->all()['description'];
           $post->save();

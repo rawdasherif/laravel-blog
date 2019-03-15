@@ -1,83 +1,51 @@
-<!DOCTYPE html>
-<html>
-<head>
-<style>
-table {
-  font-family: arial, sans-serif;
-  border-collapse: collapse;
-  width: 100%;
-}
+@extends('layouts.app')
 
-td, th {
-  border: 1px solid #dddddd;
-  text-align: left;
-  padding: 8px;
-}
-
-tr:nth-child(even) {
-  background-color: #dddddd;
-}
-
-a:link, a:visited {
-  background-color: red;
-  color: white;
-  padding: 10px 10px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-
-}
-
-a:hover, a:active {
-  background-color: red;
-}
-
-input{
-  background-color:  red;
-  color: white;
-  padding: 10px 10px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-}
-
-</style>
-</head>
-<body>
-
-<a style="background-color: green;" href="{{route('posts.create')}}">create post</a>
-<a style="background-color: yellow;" href="{{route('home')}}">logout</a>
-
-
-<h2>POSTS Table</h2>
-
-<table>
-  <tr>
-    <th>ID</th>
-    <th>TITLE</th>
-    <th>CREATED AT</th>
-    <th>POSTS BY</th>
-  </tr>
+@section('content')
+<a href="{{route('posts.create')}}" class="btn btn-success">Create Post</a>
+<table class="table table-bordered table-dark">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">TITLE</th>
+      <th scope="col">SLUG</th>
+      <th scope="col">CREATED AT</th>
+      <th scope="col">WRITTEN BY</th>
+      <th scope="col">BUTTONS</th>
+    </tr>
+  </thead>
+  <tbody>
   @foreach($posts as $post)
   <tr>
     <td>{{$post->id}}</td>
     <td>{{$post->title}}</td>
-    <td>{{$post->created_at}}</td>
+    <td>{{$post->slug}}</td>
+    <td>{{$post->created_at->format('Y-m-d')}}</td>
     <td>{{isset($post->user) ? $post->user->name : 'Not Found'}}</td>
-    <td><a href="{{route('posts.edit',$post->id)}}">Edit</a>
-    <a href="{{route('posts.show',$post->id)}}">View</a>
+    <td><a class="btn btn-info" href="{{route('posts.edit',$post->id)}}">Edit</a>
+    <a  class="btn btn-warning" href="{{route('posts.show',$post->id)}}">View</a>
     <form method='POST'  action="{{route('posts.destroy',$post->id)}}">
     @csrf
     {{ method_field('DELETE')}}
-    <input type="submit" value="Delete" >
+    <button  class="btn btn-danger" type="submit"  onclick="return myFunction();" >Delete</button>
+    <script>
+      function myFunction(){
+        var agree = confirm("Are you sure you want to delete this Post?");
+          if(agree == true){
+            return true
+            }
+            else{
+            return false;
+            }
+      }
+    </script>
     </form>
 
     </td>
 
   </tr>
   @endforeach
-
+   
+  </tbody>
 </table>
-
-</body>
-</html>
+</table>
+@endsection
