@@ -11,7 +11,7 @@ use App\Http\Requests\Post\UpdatePostRequest ;
 class PostsController extends Controller
 {
     public function index (){
-      $posts =Post::all();
+      $posts =Post::with('User')->get();
       return view ('posts.index',[
         'posts' =>$posts
       ]);
