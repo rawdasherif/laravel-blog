@@ -48,13 +48,14 @@ class LoginController extends Controller
     public function handleProviderCallback()
     {
         $user = Socialite::driver('github')->user();
-        //$user->token
-         //dd($user);
+
          User::create([
              'name'=>$user->getNickname(),
              'email'=>$user->getEmail(),
 
          ]);
+        
+
         return redirect()->route('posts.index');
         
     }

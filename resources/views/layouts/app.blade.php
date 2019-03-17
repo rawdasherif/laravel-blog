@@ -79,7 +79,9 @@
         </nav>
 
         <main class="py-4">
+            
             @yield('content')
+            <a  class="btn btn-info"  href="{{route('login.github')}}" >Login With Github</a>
         </main>
     </div>
 </body>
